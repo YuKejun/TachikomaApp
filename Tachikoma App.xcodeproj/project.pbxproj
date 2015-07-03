@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BCB87F31B4688CC002733FD /* PackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCB87F21B4688CC002733FD /* PackerViewController.m */; };
 		4BF2FA971B4664B500AA5D28 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF2FA961B4664B500AA5D28 /* main.m */; };
 		4BF2FA9A1B4664B500AA5D28 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF2FA991B4664B500AA5D28 /* AppDelegate.m */; };
 		4BF2FA9D1B4664B500AA5D28 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF2FA9C1B4664B500AA5D28 /* ViewController.m */; };
@@ -14,6 +15,8 @@
 		4BF2FAA21B4664B500AA5D28 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BF2FAA11B4664B500AA5D28 /* Images.xcassets */; };
 		4BF2FAA51B4664B500AA5D28 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF2FAA31B4664B500AA5D28 /* LaunchScreen.xib */; };
 		4BF2FAB11B4664B600AA5D28 /* Tachikoma_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF2FAB01B4664B600AA5D28 /* Tachikoma_AppTests.m */; };
+		4BF2FABC1B46656C00AA5D28 /* DockSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF2FABB1B46656C00AA5D28 /* DockSettingViewController.m */; };
+		4BF2FABF1B46661100AA5D28 /* ContainerScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF2FABE1B46661100AA5D28 /* ContainerScanViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4BCB87F11B4688CB002733FD /* PackerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackerViewController.h; sourceTree = "<group>"; };
+		4BCB87F21B4688CC002733FD /* PackerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackerViewController.m; sourceTree = "<group>"; };
 		4BF2FA911B4664B500AA5D28 /* Tachikoma App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tachikoma App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF2FA951B4664B500AA5D28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4BF2FA961B4664B500AA5D28 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -40,6 +45,10 @@
 		4BF2FAAA1B4664B600AA5D28 /* Tachikoma AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tachikoma AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF2FAAF1B4664B600AA5D28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4BF2FAB01B4664B600AA5D28 /* Tachikoma_AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tachikoma_AppTests.m; sourceTree = "<group>"; };
+		4BF2FABA1B46656C00AA5D28 /* DockSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockSettingViewController.h; sourceTree = "<group>"; };
+		4BF2FABB1B46656C00AA5D28 /* DockSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockSettingViewController.m; sourceTree = "<group>"; };
+		4BF2FABD1B46661100AA5D28 /* ContainerScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerScanViewController.h; sourceTree = "<group>"; };
+		4BF2FABE1B46661100AA5D28 /* ContainerScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerScanViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +95,12 @@
 				4BF2FA9B1B4664B500AA5D28 /* ViewController.h */,
 				4BF2FA9C1B4664B500AA5D28 /* ViewController.m */,
 				4BF2FA9E1B4664B500AA5D28 /* Main.storyboard */,
+				4BCB87F11B4688CB002733FD /* PackerViewController.h */,
+				4BCB87F21B4688CC002733FD /* PackerViewController.m */,
+				4BF2FABD1B46661100AA5D28 /* ContainerScanViewController.h */,
+				4BF2FABE1B46661100AA5D28 /* ContainerScanViewController.m */,
+				4BF2FABA1B46656C00AA5D28 /* DockSettingViewController.h */,
+				4BF2FABB1B46656C00AA5D28 /* DockSettingViewController.m */,
 				4BF2FAA11B4664B500AA5D28 /* Images.xcassets */,
 				4BF2FAA31B4664B500AA5D28 /* LaunchScreen.xib */,
 				4BF2FA941B4664B500AA5D28 /* Supporting Files */,
@@ -168,6 +183,7 @@
 				TargetAttributes = {
 					4BF2FA901B4664B500AA5D28 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = ST4C3C363P;
 					};
 					4BF2FAA91B4664B600AA5D28 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -219,8 +235,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BF2FABC1B46656C00AA5D28 /* DockSettingViewController.m in Sources */,
 				4BF2FA9D1B4664B500AA5D28 /* ViewController.m in Sources */,
+				4BCB87F31B4688CC002733FD /* PackerViewController.m in Sources */,
 				4BF2FA9A1B4664B500AA5D28 /* AppDelegate.m in Sources */,
+				4BF2FABF1B46661100AA5D28 /* ContainerScanViewController.m in Sources */,
 				4BF2FA971B4664B500AA5D28 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,7 +366,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Tachikoma App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -357,7 +378,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Tachikoma App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -416,6 +439,7 @@
 				4BF2FAB61B4664B600AA5D28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4BF2FAB71B4664B600AA5D28 /* Build configuration list for PBXNativeTarget "Tachikoma AppTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +448,7 @@
 				4BF2FAB91B4664B600AA5D28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
