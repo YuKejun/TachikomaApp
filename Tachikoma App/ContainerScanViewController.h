@@ -10,6 +10,6 @@
 
 @interface ContainerScanViewController : UIViewController
 
-- (IBAction)scanContainer:(UIStoryboardSegue *)segue;
+- (IBAction)unwindToContainerScan:(UIStoryboardSegue *)segue;
 
 @end

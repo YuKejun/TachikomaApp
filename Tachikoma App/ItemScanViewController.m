@@ -20,6 +20,7 @@
     UIView *_highlightView;
     UILabel *_label;
 }
+@property (weak, nonatomic) IBOutlet UIButton *dismissButton;
 
 
 @end
@@ -70,6 +71,9 @@
     
     [self.view bringSubviewToFront:_highlightView];
     [self.view bringSubviewToFront:_label];
+    if (self.scanType == IMPORT_SCAN) {
+        [self.view bringSubviewToFront:self.dismissButton];
+    }
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
@@ -132,17 +136,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"UnwindToContainerScan"]) {
+        [_session stopRunning];
+    }
 }
-*/
 
-#pragma - UIAlertViewDelegate
+
+#pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == [alertView cancelButtonIndex]) {

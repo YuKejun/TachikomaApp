@@ -10,7 +10,12 @@
 #import "ContainerScanViewController.h"
 
 @interface DockSettingViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *dockIdTextField;
+@property NSInputStream *inputStream;
+@property NSOutputStream *outputStream;
+
+- (void)initNetworkCommunication;
 
 @end
 
@@ -19,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self initNetworkCommunication];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,9 +33,16 @@
 }
 
 - (IBAction)joinNetwork:(UIButton *)sender {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     int dockId = [self.dockIdTextField.text intValue];
-    NSString* viewControllerIdentifier;
+//    NSString* viewControllerIdentifier;
+    char message[2];
+    message[0] = (int)13;
+    message[1] = (char)dockId;
+    NSData *data = [NSData dataWithBytes:message length:2];
+//    NSInteger returned_len = [self.outputStream write:[data bytes] maxLength:[data length]];
+    // TODO: check whether the whole message is sent
+//    NSLog(@"%ld", (long)returned_len);
     if (dockId == 1) {
 //        viewControllerIdentifier = @"ContainerScanViewController";
         [self performSegueWithIdentifier:@"ToImportSegue" sender:self];
@@ -40,6 +53,21 @@
     }
 //    UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:viewControllerIdentifier];
 //    [self presentViewController:vc animated:YES completion:nil];
+}
+
+#pragma mark - Communication
+- (void)initNetworkCommunication {
+    CFReadStreamRef readStream;
+    CFWriteStreamRef writeStream;
+    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"192.168.8.83", 29876, &readStream, &writeStream);
+    self.inputStream = (__bridge_transfer NSInputStream *)readStream;
+    self.outputStream = (__bridge_transfer NSOutputStream *)writeStream;
+    [self.inputStream setDelegate:self];
+    [self.outputStream setDelegate:self];
+    [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.inputStream open];
+    [self.outputStream open];
 }
 
 /*

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DockSettingViewController : UIViewController
+@interface DockSettingViewController : UIViewController <NSStreamDelegate>
 
 @end
