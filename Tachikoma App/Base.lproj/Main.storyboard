@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.20" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--Dock Setting View Controller-->
@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Enter your Dock ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDw-CW-vCq">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your Dock ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDw-CW-vCq">
                                 <rect key="frame" x="228" y="256" width="145" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -38,6 +38,24 @@
                                 </state>
                                 <connections>
                                     <action selector="joinNetwork:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="igo-54-Dh9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSq-9O-kq6">
+                                <rect key="frame" x="180" y="433" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="qv8-ti-Ztg" kind="presentation" identifier="ToImportSegue" id="SKB-yb-Bgu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mjo-FG-D55">
+                                <rect key="frame" x="336" y="433" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="h4L-MI-48W" kind="presentation" identifier="ToPackingSegue" id="zPo-xo-Mmj"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -71,16 +89,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hello World!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iks-f3-2ia">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iks-f3-2ia">
                                 <rect key="frame" x="254" y="289" width="93" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jqc-ue-LFp">
+                                <rect key="frame" x="284" y="343" width="32" height="30"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="42w-C7-Qak" kind="presentation" identifier="checkInSegue" id="VZR-6y-slB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Jqc-ue-LFp" firstAttribute="top" secondItem="Iks-f3-2ia" secondAttribute="bottom" constant="33" id="1T7-Yy-bO6"/>
                             <constraint firstAttribute="centerX" secondItem="Iks-f3-2ia" secondAttribute="centerX" id="S1t-QW-euL"/>
+                            <constraint firstAttribute="centerX" secondItem="Jqc-ue-LFp" secondAttribute="centerX" id="Tr8-FL-fmz"/>
                             <constraint firstAttribute="centerY" secondItem="Iks-f3-2ia" secondAttribute="centerY" id="U2L-8i-VPQ"/>
                             <constraint firstAttribute="centerY" secondItem="Iks-f3-2ia" secondAttribute="centerY" id="eRB-05-rOs"/>
                             <constraint firstAttribute="centerX" secondItem="Iks-f3-2ia" secondAttribute="centerX" id="iw6-UN-I3f"/>
@@ -90,7 +119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SgL-Ed-hGR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1087" y="352"/>
+            <point key="canvasLocation" x="1087" y="280"/>
         </scene>
         <!--Packer View Controller-->
         <scene sceneID="FJf-U0-Wgm">
@@ -136,10 +165,10 @@
             </objects>
             <point key="canvasLocation" x="1087" y="1098"/>
         </scene>
-        <!--View Controller-->
+        <!--Item Scan View Controller-->
         <scene sceneID="LsE-gL-9XR">
             <objects>
-                <viewController id="42w-C7-Qak" sceneMemberID="viewController">
+                <viewController id="42w-C7-Qak" customClass="ItemScanViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rJW-0c-6Fa"/>
                         <viewControllerLayoutGuide type="bottom" id="1LG-ck-eo8"/>
@@ -147,15 +176,27 @@
                     <view key="view" contentMode="scaleToFill" id="3vN-ra-Lh9">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2af-mN-wdK">
+                                <rect key="frame" x="115" y="442" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Qfu-Wh-9fQ" kind="unwind" identifier="UnwindToPackerMain" unwindAction="unwindToPackerMain:" id="rXj-fA-sKw"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sFc-Z3-nxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Qfu-Wh-9fQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1727" y="1098"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9Um-7p-QFw"/>
+        <segue reference="VZR-6y-slB"/>
     </inferredMetricsTieBreakers>
 </document>

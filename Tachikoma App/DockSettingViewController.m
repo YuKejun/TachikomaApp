@@ -31,13 +31,15 @@
     int dockId = [self.dockIdTextField.text intValue];
     NSString* viewControllerIdentifier;
     if (dockId == 1) {
-        viewControllerIdentifier = @"ContainerScanViewController";
+//        viewControllerIdentifier = @"ContainerScanViewController";
+        [self performSegueWithIdentifier:@"ToImportSegue" sender:self];
     }
     else if (dockId == 2) {
-        viewControllerIdentifier = @"PackerViewController";
+//        viewControllerIdentifier = @"PackerViewController";
+        [self performSegueWithIdentifier:@"ToPackingSegue" sender:self];
     }
-    UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:viewControllerIdentifier];
-    [self presentViewController:vc animated:YES completion:nil];
+//    UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:viewControllerIdentifier];
+//    [self presentViewController:vc animated:YES completion:nil];
 }
 
 /*

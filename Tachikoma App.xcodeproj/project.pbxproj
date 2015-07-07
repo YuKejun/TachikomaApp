@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4BCB87F31B4688CC002733FD /* PackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCB87F21B4688CC002733FD /* PackerViewController.m */; };
+		4BD816A41B46AE5900736E30 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD816A31B46AE5900736E30 /* AVFoundation.framework */; };
+		4BD816A71B46AEA300736E30 /* ItemScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD816A61B46AEA300736E30 /* ItemScanViewController.m */; };
 		4BF2FA971B4664B500AA5D28 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF2FA961B4664B500AA5D28 /* main.m */; };
 		4BF2FA9A1B4664B500AA5D28 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF2FA991B4664B500AA5D28 /* AppDelegate.m */; };
 		4BF2FA9D1B4664B500AA5D28 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BF2FA9C1B4664B500AA5D28 /* ViewController.m */; };
@@ -32,6 +34,9 @@
 /* Begin PBXFileReference section */
 		4BCB87F11B4688CB002733FD /* PackerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackerViewController.h; sourceTree = "<group>"; };
 		4BCB87F21B4688CC002733FD /* PackerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackerViewController.m; sourceTree = "<group>"; };
+		4BD816A31B46AE5900736E30 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4BD816A51B46AEA300736E30 /* ItemScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemScanViewController.h; sourceTree = "<group>"; };
+		4BD816A61B46AEA300736E30 /* ItemScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemScanViewController.m; sourceTree = "<group>"; };
 		4BF2FA911B4664B500AA5D28 /* Tachikoma App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tachikoma App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF2FA951B4664B500AA5D28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4BF2FA961B4664B500AA5D28 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -56,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BD816A41B46AE5900736E30 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +78,7 @@
 		4BF2FA881B4664B500AA5D28 = {
 			isa = PBXGroup;
 			children = (
+				4BD816A31B46AE5900736E30 /* AVFoundation.framework */,
 				4BF2FA931B4664B500AA5D28 /* Tachikoma App */,
 				4BF2FAAD1B4664B600AA5D28 /* Tachikoma AppTests */,
 				4BF2FA921B4664B500AA5D28 /* Products */,
@@ -95,6 +102,8 @@
 				4BF2FA9B1B4664B500AA5D28 /* ViewController.h */,
 				4BF2FA9C1B4664B500AA5D28 /* ViewController.m */,
 				4BF2FA9E1B4664B500AA5D28 /* Main.storyboard */,
+				4BD816A51B46AEA300736E30 /* ItemScanViewController.h */,
+				4BD816A61B46AEA300736E30 /* ItemScanViewController.m */,
 				4BCB87F11B4688CB002733FD /* PackerViewController.h */,
 				4BCB87F21B4688CC002733FD /* PackerViewController.m */,
 				4BF2FABD1B46661100AA5D28 /* ContainerScanViewController.h */,
@@ -237,6 +246,7 @@
 			files = (
 				4BF2FABC1B46656C00AA5D28 /* DockSettingViewController.m in Sources */,
 				4BF2FA9D1B4664B500AA5D28 /* ViewController.m in Sources */,
+				4BD816A71B46AEA300736E30 /* ItemScanViewController.m in Sources */,
 				4BCB87F31B4688CC002733FD /* PackerViewController.m in Sources */,
 				4BF2FA9A1B4664B500AA5D28 /* AppDelegate.m in Sources */,
 				4BF2FABF1B46661100AA5D28 /* ContainerScanViewController.m in Sources */,
