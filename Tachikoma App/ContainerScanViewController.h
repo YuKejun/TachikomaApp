@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ContainerScanViewController : UIViewController
+@interface ContainerScanViewController : UIViewController <NSStreamDelegate>
+
+@property NSInputStream *inputStream;
+@property NSOutputStream *outputStream;
 
 - (IBAction)unwindToContainerScan:(UIStoryboardSegue *)segue;
 

@@ -9,7 +9,7 @@
 #import "ItemScanViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface ItemScanViewController () <AVCaptureMetadataOutputObjectsDelegate>
+@interface ItemScanViewController () <AVCaptureMetadataOutputObjectsDelegate, UIAlertViewDelegate>
 {
     AVCaptureSession *_session;
     AVCaptureDevice *_device;
@@ -106,13 +106,32 @@
             NSString *alertViewMessage;
             if (self.scanType == IMPORT_SCAN) {
                 alertViewMessage = [NSString stringWithFormat:@"Checkin item %d", itemId];
+                char message[3];
+                message[0] = (char)9;
+                message[1] = (char)itemId;
+                message[2] = (char)self.containerId;
+                NSData *data = [NSData dataWithBytes:message length:3];
+                [self.outputStream write:[data bytes] maxLength:[data length]];
+                // TODO: check return value
             }
             else if (self.scanType == FETCH_SCAN) {
                 alertViewMessage = [NSString stringWithFormat:@"Fetch item %d", itemId];
+                char message[2];
+                message[0] = (char)1;
+                message[1] = (char)itemId;
+                NSData *data = [NSData dataWithBytes:message length:2];
+                [self.outputStream write:[data bytes] maxLength:[data length]];
+                // TODO: check return value
                 NSLog(@"Fetch item %d", itemId);
             }
-            else {
+            else {  // CHECKOUT_SCAN
                 alertViewMessage = [NSString stringWithFormat:@"Chekout item %d", itemId];
+                char message[2];
+                message[0] = (char)10;
+                message[1] = (char)itemId;
+                NSData *data = [NSData dataWithBytes:message length:2];
+                [self.outputStream write:[data bytes] maxLength:[data length]];
+                // TODO: check return value
                 NSLog(@"Chekout item %d", itemId);
             }
             
@@ -145,6 +164,10 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"UnwindToContainerScan"]) {
         [_session stopRunning];
+        char commandCode = (char)12;
+        NSData *data = [NSData dataWithBytes:&commandCode length:1];
+        // TODO: check return value
+        [self.outputStream write:[data bytes] maxLength:[data length]];
     }
 }
 

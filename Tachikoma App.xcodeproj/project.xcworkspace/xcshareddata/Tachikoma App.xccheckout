@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>B8E635D5-DF3C-4BE5-85D9-A0436DDAD3FE</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Tachikoma App</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>B4560C615C1FB48632CD41EA1A03375EE55D165C</key>
 		<string>https://github.com/YuKejun/TachikomaApp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Tachikoma App.xcodeproj/project.xcworkspace</string>
+	<string>Tachikoma App.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>B4560C615C1FB48632CD41EA1A03375EE55D165C</key>

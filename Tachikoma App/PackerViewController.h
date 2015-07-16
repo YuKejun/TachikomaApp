@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PackerViewController : UIViewController
+@interface PackerViewController : UIViewController <NSStreamDelegate>
+
+@property NSInputStream *inputStream;
+@property NSOutputStream *outputStream;
 
 - (IBAction)unwindToPackerMain:(UIStoryboardSegue *)unwindSegue;
 

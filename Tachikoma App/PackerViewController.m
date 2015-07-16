@@ -26,7 +26,8 @@
 }
 
 - (IBAction)unwindToPackerMain:(UIStoryboardSegue *)unwindSegue {
-    
+    [self.inputStream setDelegate:self];
+    [self.outputStream setDelegate:self];
 }
 
 
@@ -37,6 +38,10 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     ItemScanViewController *dest = (ItemScanViewController*)[segue destinationViewController];
+    dest.inputStream = self.inputStream;
+    [dest.inputStream setDelegate:dest];
+    dest.outputStream = self.outputStream;
+    [dest.outputStream setDelegate:dest];
     if ([segue.identifier isEqualToString:@"fetchItemSegue"]) {
         dest.scanType = FETCH_SCAN;
     }

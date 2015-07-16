@@ -101,6 +101,10 @@
             self.containerId = [detectionString intValue];
             NSString *alertViewTitle;
             NSString *alertViewMessage = [NSString stringWithFormat:@"Deal with container %d", self.containerId];
+            char commandCode = (char)0;
+            NSData *data = [NSData dataWithBytes:&commandCode length:1];
+            [self.outputStream write:[data bytes] maxLength:[data length]];
+            // TODO: check return value
             UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Title"
                                                                message:alertViewMessage
                                                               delegate:self
@@ -133,12 +137,18 @@
     if ([segue.identifier isEqualToString:@"checkInSegue"]) {
         dest.scanType = IMPORT_SCAN;
         dest.containerId = self.containerId;
+        dest.inputStream = self.inputStream;
+        [dest.inputStream setDelegate:dest];
+        dest.outputStream = self.outputStream;
+        [dest.outputStream setDelegate:dest];
     }
 }
 
 - (IBAction)unwindToContainerScan:(UIStoryboardSegue *)segue {
     [_session startRunning];
     _highlightView.frame = CGRectMake(0, 0, 0, 0);
+    [self.inputStream setDelegate:self];
+    [self.outputStream setDelegate:self];
 }
 
 

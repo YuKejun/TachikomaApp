@@ -14,9 +14,11 @@ enum ScanType {
     CHECKOUT_SCAN
 };
 
-@interface ItemScanViewController : UIViewController <UIAlertViewDelegate>
+@interface ItemScanViewController : UIViewController <NSStreamDelegate>
 
 @property (nonatomic, assign) enum ScanType scanType;
 @property int containerId;
+@property NSInputStream *inputStream;
+@property NSOutputStream *outputStream;
 
 @end

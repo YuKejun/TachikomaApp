@@ -8,12 +8,14 @@
 
 #import "DockSettingViewController.h"
 #import "ContainerScanViewController.h"
+#import "PackerViewController.h"
 
-@interface DockSettingViewController ()
+@interface DockSettingViewController () <NSStreamDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *dockIdTextField;
 @property NSInputStream *inputStream;
 @property NSOutputStream *outputStream;
+@property int dockId;
 
 - (void)initNetworkCommunication;
 
@@ -33,26 +35,14 @@
 }
 
 - (IBAction)joinNetwork:(UIButton *)sender {
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    int dockId = [self.dockIdTextField.text intValue];
-//    NSString* viewControllerIdentifier;
+    self.dockId = [self.dockIdTextField.text intValue];
     char message[2];
     message[0] = (int)13;
-    message[1] = (char)dockId;
+    message[1] = (char)self.dockId;
     NSData *data = [NSData dataWithBytes:message length:2];
-//    NSInteger returned_len = [self.outputStream write:[data bytes] maxLength:[data length]];
+    NSInteger returned_len = [self.outputStream write:[data bytes] maxLength:[data length]];
     // TODO: check whether the whole message is sent
 //    NSLog(@"%ld", (long)returned_len);
-    if (dockId == 1) {
-//        viewControllerIdentifier = @"ContainerScanViewController";
-        [self performSegueWithIdentifier:@"ToImportSegue" sender:self];
-    }
-    else if (dockId == 2) {
-//        viewControllerIdentifier = @"PackerViewController";
-        [self performSegueWithIdentifier:@"ToPackingSegue" sender:self];
-    }
-//    UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:viewControllerIdentifier];
-//    [self presentViewController:vc animated:YES completion:nil];
 }
 
 #pragma mark - Communication
@@ -70,14 +60,54 @@
     [self.outputStream open];
 }
 
-/*
+- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
+    if (aStream == self.inputStream && eventCode == NSStreamEventHasBytesAvailable) {
+        unsigned char reply;
+        long len = [self.inputStream read:&reply maxLength:1];
+        if (len != 1) {
+            NSLog(@"Join request receive byte %ld", len);
+        }
+        // do appropriate action according to the reply
+        NSLog(@"receive %d", (int)reply);
+        if (reply == (char)2) {
+            if (self.dockId == 1) {
+                [self performSegueWithIdentifier:@"ToImportSegue" sender:self];
+            }
+            else if (self.dockId == 2) {
+                [self performSegueWithIdentifier:@"ToPackingSegue" sender:self];
+            }
+        }
+        else if (reply == (char)3) {
+            UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Title"
+                                                               message:@"Join request is rejected"
+                                                              delegate:self
+                                                     cancelButtonTitle:@"OK"
+                                                     otherButtonTitles:nil];
+            [theAlert show];
+        }
+    }
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"ToImportSegue"]) {
+        ContainerScanViewController *dest = (ContainerScanViewController*)[segue destinationViewController];
+        dest.inputStream = self.inputStream;
+        [dest.inputStream setDelegate:dest];
+        dest.outputStream = self.outputStream;
+        [dest.outputStream setDelegate:dest];
+    }
+    else if ([segue.identifier isEqualToString:@"ToPackingSegue"]) {
+        PackerViewController *dest = (PackerViewController*)[segue destinationViewController];
+        dest.inputStream = self.inputStream;
+        [dest.inputStream setDelegate:dest];
+        dest.outputStream = self.outputStream;
+        [dest.outputStream setDelegate:dest];
+    }
 }
-*/
+
 
 @end
