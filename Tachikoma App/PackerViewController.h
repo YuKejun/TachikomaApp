@@ -12,6 +12,7 @@
 
 @property NSInputStream *inputStream;
 @property NSOutputStream *outputStream;
+@property BOOL isRobotPresent;
 
 - (IBAction)unwindToPackerMain:(UIStoryboardSegue *)unwindSegue;
 

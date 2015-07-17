@@ -65,10 +65,9 @@
         unsigned char reply;
         long len = [self.inputStream read:&reply maxLength:1];
         if (len != 1) {
-            NSLog(@"Join request receive byte %ld", len);
+            NSLog(@"Join request error: receive byte %ld, expected 1", len);
         }
         // do appropriate action according to the reply
-        NSLog(@"receive %d", (int)reply);
         if (reply == (char)2) {
             if (self.dockId == 1) {
                 [self performSegueWithIdentifier:@"ToImportSegue" sender:self];
@@ -84,6 +83,9 @@
                                                      cancelButtonTitle:@"OK"
                                                      otherButtonTitles:nil];
             [theAlert show];
+        }
+        else {
+            NSLog(@"Join Request error: receive reply %d, expected 2 or 3", reply);
         }
     }
 }
@@ -106,6 +108,7 @@
         [dest.inputStream setDelegate:dest];
         dest.outputStream = self.outputStream;
         [dest.outputStream setDelegate:dest];
+        dest.isRobotPresent = NO;
     }
 }
 

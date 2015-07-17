@@ -150,6 +150,9 @@
                             <constraint firstAttribute="centerX" secondItem="qcj-Wq-xdv" secondAttribute="centerX" id="cPv-cR-7E9"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="checkOutButton" destination="7rQ-9g-hHt" id="e4s-S9-hCN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CHi-zM-VQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -203,6 +206,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VZR-6y-slB"/>
+        <segue reference="wyN-9f-WUD"/>
     </inferredMetricsTieBreakers>
 </document>

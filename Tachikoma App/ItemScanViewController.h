@@ -20,5 +20,6 @@ enum ScanType {
 @property int containerId;
 @property NSInputStream *inputStream;
 @property NSOutputStream *outputStream;
+@property BOOL isRobotPresent;
 
 @end

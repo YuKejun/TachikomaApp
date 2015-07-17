@@ -22,7 +22,6 @@
 }
 @property (weak, nonatomic) IBOutlet UIButton *dismissButton;
 
-
 @end
 
 @implementation ItemScanViewController
@@ -73,6 +72,7 @@
     [self.view bringSubviewToFront:_label];
     if (self.scanType == IMPORT_SCAN) {
         [self.view bringSubviewToFront:self.dismissButton];
+        [self.dismissButton setEnabled:NO];
     }
 }
 
@@ -105,7 +105,7 @@
             NSString *alertViewTitle;
             NSString *alertViewMessage;
             if (self.scanType == IMPORT_SCAN) {
-                alertViewMessage = [NSString stringWithFormat:@"Checkin item %d", itemId];
+                alertViewMessage = [NSString stringWithFormat:@"Checkin item %d to container %d", itemId, self.containerId];
                 char message[3];
                 message[0] = (char)9;
                 message[1] = (char)itemId;
@@ -125,11 +125,15 @@
                 NSLog(@"Fetch item %d", itemId);
             }
             else {  // CHECKOUT_SCAN
-                alertViewMessage = [NSString stringWithFormat:@"Chekout item %d", itemId];
-                char message[2];
+                alertViewMessage = [NSString stringWithFormat:@"Chekout item %d from container %d", itemId, self.containerId];
+                char message[4];
                 message[0] = (char)10;
                 message[1] = (char)itemId;
-                NSData *data = [NSData dataWithBytes:message length:2];
+                // dismiss the robot after checkout
+                message[2] = (char)12;
+                message[3] = (char)self.containerId;
+                self.isRobotPresent = NO;
+                NSData *data = [NSData dataWithBytes:message length:4];
                 [self.outputStream write:[data bytes] maxLength:[data length]];
                 // TODO: check return value
                 NSLog(@"Chekout item %d", itemId);
@@ -164,8 +168,10 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"UnwindToContainerScan"]) {
         [_session stopRunning];
-        char commandCode = (char)12;
-        NSData *data = [NSData dataWithBytes:&commandCode length:1];
+        char message[2];
+        message[0] = (char)12;
+        message[1] = (char)self.containerId;
+        NSData *data = [NSData dataWithBytes:message length:2];
         // TODO: check return value
         [self.outputStream write:[data bytes] maxLength:[data length]];
     }
@@ -182,6 +188,38 @@
         }
         else {
             [self performSegueWithIdentifier:@"UnwindToPackerMain" sender:self];
+        }
+    }
+}
+
+
+
+# pragma mark - NSStreamDelegate
+- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
+    if (aStream == self.inputStream && eventCode == NSStreamEventHasBytesAvailable) {
+        if (self.scanType == IMPORT_SCAN) {
+            // if being notified that a robot has arrived, enable the DISMISS button
+            unsigned char reply;
+            long len = [self.inputStream read:&reply maxLength:1];
+            if (len != 1)
+                NSLog(@"IMPORT_SCAN error: receive byte %ld, expected 1", len);
+            if (reply != 0)
+                NSLog(@"IMPORT SCAN error: receive reply %d, expected 0", reply);
+            [self.dismissButton setEnabled:YES];
+        }
+        else if (self.scanType == FETCH_SCAN) {
+            // if being notified that a robot has arrived, log it and notify the packer page at return
+            unsigned char reply;
+            long len = [self.inputStream read:&reply maxLength:1];
+            if (len != 1)
+                NSLog(@"FETCH_SCAN error: receive byte %ld, expected 1", len);
+            if (reply != 5)
+                NSLog(@"IMPORT SCAN error: receive reply %d, expected 5", reply);
+            self.isRobotPresent = YES;
+        }
+        else {  // CHECKOUT_SCAN
+            // shouldn't receive anything
+            NSLog(@"CHECKOUT_SCAN error: Shouldn't receive anything");
         }
     }
 }
