@@ -21,6 +21,7 @@
     UILabel *_label;
 }
 @property (weak, nonatomic) IBOutlet UIButton *dismissButton;
+@property int itemId;
 
 @end
 
@@ -101,34 +102,34 @@
             [_session stopRunning];
             
             _label.text = detectionString;
-            int itemId = [detectionString intValue];
+            self.itemId = [detectionString intValue];
             NSString *alertViewTitle;
             NSString *alertViewMessage;
             if (self.scanType == IMPORT_SCAN) {
-                alertViewMessage = [NSString stringWithFormat:@"Checkin item %d to container %d", itemId, self.containerId];
+                alertViewMessage = [NSString stringWithFormat:@"Checkin item %d to container %d", self.itemId, self.containerId];
                 char message[3];
                 message[0] = (char)9;
-                message[1] = (char)itemId;
+                message[1] = (char)self.itemId;
                 message[2] = (char)self.containerId;
                 NSData *data = [NSData dataWithBytes:message length:3];
                 [self.outputStream write:[data bytes] maxLength:[data length]];
                 // TODO: check return value
             }
             else if (self.scanType == FETCH_SCAN) {
-                alertViewMessage = [NSString stringWithFormat:@"Fetch item %d", itemId];
+                alertViewMessage = [NSString stringWithFormat:@"Fetch item %d", self.itemId];
                 char message[2];
                 message[0] = (char)1;
-                message[1] = (char)itemId;
+                message[1] = (char)self.itemId;
                 NSData *data = [NSData dataWithBytes:message length:2];
                 [self.outputStream write:[data bytes] maxLength:[data length]];
                 // TODO: check return value
-                NSLog(@"Fetch item %d", itemId);
+                NSLog(@"Fetch item %d", self.itemId);
             }
             else {  // CHECKOUT_SCAN
-                alertViewMessage = [NSString stringWithFormat:@"Chekout item %d from container %d", itemId, self.containerId];
+                alertViewMessage = [NSString stringWithFormat:@"Chekout item %d from container %d", self.itemId, self.containerId];
                 char message[4];
                 message[0] = (char)10;
-                message[1] = (char)itemId;
+                message[1] = (char)self.itemId;
                 // dismiss the robot after checkout
                 message[2] = (char)12;
                 message[3] = (char)self.containerId;
@@ -136,15 +137,17 @@
                 NSData *data = [NSData dataWithBytes:message length:4];
                 [self.outputStream write:[data bytes] maxLength:[data length]];
                 // TODO: check return value
-                NSLog(@"Chekout item %d", itemId);
+                NSLog(@"Chekout item %d", self.itemId);
             }
             
-            UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Title"
-                                                               message:alertViewMessage
-                                                              delegate:self
-                                                     cancelButtonTitle:@"OK"
-                                                     otherButtonTitles:nil];
-            [theAlert show];
+            if (self.scanType != FETCH_SCAN) {
+                UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Title"
+                                                                   message:alertViewMessage
+                                                                  delegate:self
+                                                         cancelButtonTitle:@"OK"
+                                                         otherButtonTitles:nil];
+                [theAlert show];
+            }
             break;
         }
         else
@@ -213,9 +216,35 @@
             long len = [self.inputStream read:&reply maxLength:1];
             if (len != 1)
                 NSLog(@"FETCH_SCAN error: receive byte %ld, expected 1", len);
-            if (reply != 5)
-                NSLog(@"IMPORT SCAN error: receive reply %d, expected 5", reply);
-            self.isRobotPresent = YES;
+            // a robot has arrived
+            if (reply == 5) {
+                self.isRobotPresent = YES;
+            }
+            // reqeust item reply: success
+            else if (reply == 4) {
+                unsigned char containerId;
+                long len = [self.inputStream read:&containerId maxLength:1];
+                if (len != 1)
+                    NSLog(@"FETCH_SCAN reply error: receive byte %ld, expected 1", len);
+                self.containerId = (int)containerId;
+                NSString* alertViewMessage = [NSString stringWithFormat:@"Item %d is found in container %d", self.itemId, containerId];
+                UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Title"
+                                                                   message:alertViewMessage
+                                                                  delegate:self
+                                                         cancelButtonTitle:@"OK"
+                                                         otherButtonTitles:nil];
+                [theAlert show];
+            }
+            // request item reply: item does not exist
+            else if (reply == 6) {
+                NSString* alertViewMessage = [NSString stringWithFormat:@"Item %d doe not exist", self.itemId];
+                UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Title"
+                                                                   message:alertViewMessage
+                                                                  delegate:self
+                                                         cancelButtonTitle:@"OK"
+                                                         otherButtonTitles:nil];
+                [theAlert show];
+            }
         }
         else {  // CHECKOUT_SCAN
             // shouldn't receive anything
